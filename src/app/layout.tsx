@@ -4,6 +4,7 @@ import "./globals.css";
 import QueryProvider from "@/components/providers/query-provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Header } from "@/components/header";
 
 const space_mono = Space_Mono({
     subsets: ["latin"],
@@ -33,9 +34,8 @@ export default function RootLayout({ children }: Props) {
                 className={`flex min-h-screen flex-col ${space_mono.variable} ${work_sans.variable}`}
             >
                 <QueryProvider>
-                    {/* <Header /> */}
+                    <Header />
                     {children}
-                    {/* <Footer /> */}
                 </QueryProvider>
 
                 <ToastContainer hideProgressBar autoClose={3000} position="bottom-right" />
