@@ -21,8 +21,8 @@ const work_sans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-    title: "NFT Marketplace",
-    description: "NFT Marketplace",
+    title: "Todo app",
+    description: "Todo app",
 };
 
 type Props = React.PropsWithChildren;
