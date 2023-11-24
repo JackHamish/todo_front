@@ -32,7 +32,7 @@ const indicatorsContainerStyles = "p-1 ";
 const indicatorSeparatorStyles = "none";
 const dropdownIndicatorStyles = "p-1 hover:bg-gray-100  rounded-2xl hover:text-black";
 const menuStyles =
-    "p-2 mt-2 border border-gray-200 bg-white rounded-3xl text-friar-gray animate-fadeIn ";
+    "p-2 mt-2 border border-gray-200 bg-white rounded-3xl max-h-36  text-friar-gray animate-fadeIn ";
 const groupHeadingStyles = "ml-3 mt-2 mb-1  text-sm";
 const optionStyles = {
     base: "hover:cursor-pointer px-3 py-2 rounded-3xl text-center",
@@ -56,6 +56,10 @@ export const selectStylesConfig: StylesConfig<any, false, any> = {
         transition: "all .2s ease",
         transform: state.selectProps.menuIsOpen ? "rotate(180deg)" : "none",
     }),
+    menuList: (base, state) => ({
+        ...base,
+        maxHeight: "125px",
+    }),
 };
 
 export const selectClassnamesConfig: ClassNamesConfig = {
@@ -73,4 +77,5 @@ export const selectClassnamesConfig: ClassNamesConfig = {
     option: ({ isFocused, isSelected }) =>
         cn(isFocused && optionStyles.focus, isSelected && optionStyles.selected, optionStyles.base),
     noOptionsMessage: () => noOptionsMessageStyles,
+    menuList: () => "!max-h-32 ",
 };

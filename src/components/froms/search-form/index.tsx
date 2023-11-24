@@ -46,7 +46,7 @@ export const SearchForm = () => {
     }, [debouncedTitleValue, priorityValue, statusValue]);
 
     return (
-        <form onSubmit={onSubmit} className="flex items-center gap-5">
+        <form onSubmit={onSubmit} className="flex items-center gap-10">
             <Controller
                 control={control}
                 name="title"
@@ -67,7 +67,6 @@ export const SearchForm = () => {
                     <Select
                         styles={selectStylesConfig}
                         classNames={selectClassnamesConfig}
-                        defaultMenuIsOpen
                         options={statusSelectData}
                         onChange={(val) => onChange(val?.value)}
                         onBlur={onBlur}

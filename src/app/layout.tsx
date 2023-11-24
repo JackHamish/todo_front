@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Mono, Work_Sans } from "next/font/google";
 import "./globals.css";
+import "../../public/fonts/icons/style.css";
 import QueryProvider from "@/components/providers/query-provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,9 +26,11 @@ export const metadata: Metadata = {
     description: "Todo app",
 };
 
-type Props = React.PropsWithChildren;
+type Props = React.PropsWithChildren & {
+    createTodoModal: React.ReactNode;
+};
 
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({ children, createTodoModal }: Props) {
     return (
         <html lang="en">
             <body
@@ -36,6 +39,7 @@ export default function RootLayout({ children }: Props) {
                 <QueryProvider>
                     <Header />
                     {children}
+                    {createTodoModal}
                 </QueryProvider>
 
                 <ToastContainer hideProgressBar autoClose={3000} position="bottom-right" />
