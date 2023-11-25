@@ -8,20 +8,12 @@ import { useState } from "react";
 type Props = React.PropsWithChildren;
 
 export default function QueryProvider({ children }: Props) {
-    const [queryClient] = useState(
-        new QueryClient({
-            defaultOptions: {
-                queries: {
-                    refetchOnWindowFocus: false,
-                },
-            },
-        })
-    );
+  const [queryClient] = useState(new QueryClient());
 
-    return (
-        <QueryClientProvider client={queryClient}>
-            <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
-            <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-    );
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 }

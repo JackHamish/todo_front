@@ -8,42 +8,46 @@ import "react-toastify/dist/ReactToastify.css";
 import { Header } from "@/components/header";
 
 const space_mono = Space_Mono({
-    subsets: ["latin"],
-    weight: ["400", "700"],
-    display: "swap",
-    variable: "--font-space-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-space-mono",
 });
 
 const work_sans = Work_Sans({
-    subsets: ["latin"],
-    weight: ["400", "600"],
-    display: "swap",
-    variable: "--font-work-sans",
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  display: "swap",
+  variable: "--font-work-sans",
 });
 
 export const metadata: Metadata = {
-    title: "Task app",
-    description: "Task app",
+  title: "Todo app",
+  description: "Todo app",
 };
 
 type Props = React.PropsWithChildren & {
-    createTaskModal: React.ReactNode;
+  createTaskModal: React.ReactNode;
 };
 
 export default function RootLayout({ children, createTaskModal }: Props) {
-    return (
-        <html lang="en">
-            <body
-                className={`flex min-h-screen flex-col ${space_mono.variable} ${work_sans.variable}`}
-            >
-                <QueryProvider>
-                    <Header />
-                    {children}
-                    {createTaskModal}
-                </QueryProvider>
+  return (
+    <html lang="en">
+      <body
+        className={`flex min-h-screen flex-col ${space_mono.variable} ${work_sans.variable}`}
+      >
+        <QueryProvider>
+          <Header />
+          {children}
+          {createTaskModal}
+        </QueryProvider>
 
-                <ToastContainer hideProgressBar autoClose={3000} position="bottom-right" />
-            </body>
-        </html>
-    );
+        <ToastContainer
+          hideProgressBar
+          autoClose={3000}
+          position="bottom-right"
+        />
+      </body>
+    </html>
+  );
 }
