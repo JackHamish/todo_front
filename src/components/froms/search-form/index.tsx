@@ -9,13 +9,22 @@ import {
     statusSelectData,
 } from "./constants";
 import { Input } from "@/components/input";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import Select from "react-select";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTodos } from "@/domains/todo/hooks";
+import { useQueryClient } from "@tanstack/react-query";
+import pickBy from "lodash.pickby";
+import { log } from "console";
 
 type SearchFormData = z.infer<typeof searchSchema>;
 
 export const SearchForm = () => {
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams()!;
+
     const {
         register,
         handleSubmit,
@@ -28,7 +37,43 @@ export const SearchForm = () => {
     });
 
     const onSubmit = handleSubmit(async (data) => {
-        console.log(data);
+        const newParams = new URLSearchParams(searchParams.toString());
+
+        const params = {
+            sortField: data?.priority?.split("_")[0] === "all" ? "" : data?.priority?.split("_")[0],
+            sortOrder: data?.priority?.split("_")[1] || "",
+            title: data.title,
+            status: data.status,
+        };
+
+        const filteredParams = pickBy(params, (value) => value && value.length > 0);
+
+        if (filteredParams?.title) {
+            newParams.set("title", `${params.title}`);
+        } else {
+            newParams.delete("title");
+        }
+
+        if (filteredParams?.sortField) {
+            newParams.set("sortField", `${params.sortField}`);
+        } else {
+            newParams.delete("sortField");
+        }
+
+        if (filteredParams?.sortOrder) {
+            newParams.set("sortOrder", `${params.sortOrder}`);
+        } else {
+            newParams.delete("sortOrder");
+        }
+
+        if (filteredParams?.status) {
+            newParams.set("status", `${params.status}`);
+        } else {
+            newParams.delete("status");
+        }
+        if (searchParams.toString() !== newParams.toString()) {
+            router.push(`${pathname}?${newParams}`, { scroll: false });
+        }
     });
 
     const [titleValue, priorityValue, statusValue] = useWatch({
@@ -42,7 +87,6 @@ export const SearchForm = () => {
         if (debouncedTitleValue || priorityValue || statusValue) {
             onSubmit();
         }
-        console.log(debouncedTitleValue, priorityValue, statusValue);
     }, [debouncedTitleValue, priorityValue, statusValue]);
 
     return (
