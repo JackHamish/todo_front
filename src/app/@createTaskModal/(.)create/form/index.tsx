@@ -1,6 +1,6 @@
 "use client";
 import { z } from "zod";
-import { createTodoSchema, prioritySelectData } from "./constants";
+import { createTaskSchema, prioritySelectData } from "./constants";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/input";
@@ -10,15 +10,15 @@ import {
     selectStylesConfig,
 } from "@/components/froms/search-form/constants";
 import { Button } from "@/components/button";
-import { useAddTodo } from "@/domains/todo/hooks";
+import { useAddTask } from "@/domains/task/hooks";
 import { toast } from "react-toastify";
 import { ErrorHelpers } from "@/services/error/helpers";
 import { useRouter } from "next/navigation";
 
-type createTodoFormData = z.infer<typeof createTodoSchema>;
+type createTaskFormData = z.infer<typeof createTaskSchema>;
 
-export const CreateTodoForm = () => {
-    const { mutateAsync: createTodoAction } = useAddTodo();
+export const CreateTaskForm = () => {
+    const { mutateAsync: createTaskAction } = useAddTask();
     const router = useRouter();
 
     const {
@@ -27,16 +27,16 @@ export const CreateTodoForm = () => {
         formState: { isSubmitting, errors },
         reset,
         control,
-    } = useForm<createTodoFormData>({
-        resolver: zodResolver(createTodoSchema),
+    } = useForm<createTaskFormData>({
+        resolver: zodResolver(createTaskSchema),
         defaultValues: { title: "", priority: 1 },
     });
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            await createTodoAction(data, {
+            await createTaskAction(data, {
                 onSuccess(data, variables, context) {
-                    toast.success("Todo Created");
+                    toast.success("Task Created");
                     router.back();
                 },
             });

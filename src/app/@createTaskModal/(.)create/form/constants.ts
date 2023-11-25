@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const createTodoSchema = z.object({
+export const createTaskSchema = z.object({
     title: z.string(),
     priority: z.number(),
 });

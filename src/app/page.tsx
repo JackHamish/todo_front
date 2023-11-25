@@ -1,11 +1,11 @@
 import { SearchForm } from "@/components/froms/search-form";
-import TodoList from "@/components/todo-list";
+import TaskList from "@/components/task-list";
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <main className="flex   h-full flex-col items-center justify-between py-24 px-12">
             <SearchForm />
-            <TodoList />
+            <TaskList />
         </main>
     );
 }

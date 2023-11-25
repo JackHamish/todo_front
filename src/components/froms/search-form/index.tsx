@@ -13,7 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import Select from "react-select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useTodos } from "@/domains/todo/hooks";
+import { useTasks } from "@/domains/task/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import pickBy from "lodash.pickby";
 import { log } from "console";
@@ -74,7 +74,6 @@ export const SearchForm = () => {
         if (searchParams.toString() !== newParams.toString()) {
             router.push(`${pathname}?${newParams}`, { scroll: false });
         }
-        
     });
 
     const [titleValue, priorityValue, statusValue] = useWatch({
@@ -85,7 +84,6 @@ export const SearchForm = () => {
     const debouncedTitleValue = useDebounce<string | undefined>(titleValue, 500);
 
     useEffect(() => {
-        
         if (debouncedTitleValue || priorityValue || statusValue) {
             onSubmit();
         }

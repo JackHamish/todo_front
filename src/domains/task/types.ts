@@ -1,27 +1,27 @@
-export enum TodoStatus {
-    "DONE",
-    "UNDONE",
+export enum TaskStatus {
+    "DONE" = "DONE",
+    "UNDONE" = "UNDONE",
 }
 
-export type Todo = {
+export type Task = {
     id: string;
     createdAt: string;
     updatedAt: string;
     title: string;
     priority: number;
-    status: TodoStatus;
+    status: TaskStatus;
 };
 
-export type CreateTodo = {
+export type CreateTask = {
     title: string;
     priority: number;
 };
 
-export type UpdateTodo = {
-    status: TodoStatus;
+export type UpdateTask = {
+    status: TaskStatus;
 };
 
-export type TodoQueryParams = {
+export type TaskQueryParams = {
     title?: string;
     status?: string;
     sortField?: string;

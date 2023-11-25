@@ -22,15 +22,15 @@ const work_sans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-    title: "Todo app",
-    description: "Todo app",
+    title: "Task app",
+    description: "Task app",
 };
 
 type Props = React.PropsWithChildren & {
-    createTodoModal: React.ReactNode;
+    createTaskModal: React.ReactNode;
 };
 
-export default function RootLayout({ children, createTodoModal }: Props) {
+export default function RootLayout({ children, createTaskModal }: Props) {
     return (
         <html lang="en">
             <body
@@ -39,7 +39,7 @@ export default function RootLayout({ children, createTodoModal }: Props) {
                 <QueryProvider>
                     <Header />
                     {children}
-                    {createTodoModal}
+                    {createTaskModal}
                 </QueryProvider>
 
                 <ToastContainer hideProgressBar autoClose={3000} position="bottom-right" />
