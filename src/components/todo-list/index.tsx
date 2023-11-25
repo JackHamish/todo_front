@@ -1,7 +1,7 @@
 "use client";
 import { useTodos } from "@/domains/todo/hooks";
 import { TodoItem } from "../todo-item";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { TodoQueryParams } from "@/domains/todo";
 
 const TodoList = () => {

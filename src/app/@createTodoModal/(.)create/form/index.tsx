@@ -10,10 +10,17 @@ import {
     selectStylesConfig,
 } from "@/components/froms/search-form/constants";
 import { Button } from "@/components/button";
+import { useAddTodo } from "@/domains/todo/hooks";
+import { toast } from "react-toastify";
+import { ErrorHelpers } from "@/services/error/helpers";
+import { useRouter } from "next/navigation";
 
 type createTodoFormData = z.infer<typeof createTodoSchema>;
 
 export const CreateTodoForm = () => {
+    const { mutateAsync: createTodoAction } = useAddTodo();
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
@@ -22,11 +29,20 @@ export const CreateTodoForm = () => {
         control,
     } = useForm<createTodoFormData>({
         resolver: zodResolver(createTodoSchema),
-        defaultValues: { title: "", priority: "1" },
+        defaultValues: { title: "", priority: 1 },
     });
 
     const onSubmit = handleSubmit(async (data) => {
-        console.log(data);
+        try {
+            await createTodoAction(data, {
+                onSuccess(data, variables, context) {
+                    toast.success("Todo Created");
+                    router.back();
+                },
+            });
+        } catch (error) {
+            toast.error(ErrorHelpers.getMessage(error));
+        }
     });
 
     return (

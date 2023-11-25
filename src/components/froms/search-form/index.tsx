@@ -74,6 +74,7 @@ export const SearchForm = () => {
         if (searchParams.toString() !== newParams.toString()) {
             router.push(`${pathname}?${newParams}`, { scroll: false });
         }
+        
     });
 
     const [titleValue, priorityValue, statusValue] = useWatch({
@@ -84,6 +85,7 @@ export const SearchForm = () => {
     const debouncedTitleValue = useDebounce<string | undefined>(titleValue, 500);
 
     useEffect(() => {
+        
         if (debouncedTitleValue || priorityValue || statusValue) {
             onSubmit();
         }
