@@ -4,15 +4,8 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import {
-  CreateTask,
-  TaskQueryParams,
-  UpdateTask,
-  createTask,
-  deleteTask,
-  getAllTasks,
-  updateTask,
-} from ".";
+import { createTask, deleteTask, getAllTasks, updateTask } from "./services";
+import { CreateTask, TaskQueryParams, UpdateTask } from "./types";
 
 export const useTasks = (params: TaskQueryParams) =>
   useQuery({

@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { Button } from "../button";
 import Icon from "../icon";
 
 export const Header = () => {
   return (
-    <header className="w-full  ">
+    <header className="w-full">
       <div className="flex mx-auto w-full items-center justify-between px-12 py-5 container">
         <Link href="/">
           <h1 className="font-sans text-4xl font-semibold  border-2 border-heliotrope rounded-2xl px-7 py-4">

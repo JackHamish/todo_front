@@ -3,10 +3,9 @@ import { Button } from "../button";
 import CheckBox from "../check-box";
 import Icon from "../icon";
 import { useDeleteTask, useUpdateTask } from "@/domains/task/hooks";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import { cn } from "@/utils/cn";
-import { useQueryClient } from "@tanstack/react-query";
+import { ErrorHelpers } from "@/services/error/helpers";
 
 type Props = Task;
 
@@ -21,22 +20,30 @@ export const TaskItem = ({ id, title, priority, status }: Props) => {
       return;
     }
 
-    await updateTaskAction(
-      { id, data: { status: TaskStatus.DONE } },
-      {
-        onSuccess() {
-          toast.success(`Congratulation you task is complete: ${title}`);
+    try {
+      await updateTaskAction(
+        { id, data: { status: TaskStatus.DONE } },
+        {
+          onSuccess() {
+            toast.success(`Congratulation you task is complete: ${title}`);
+          },
         },
-      },
-    );
+      );
+    } catch (error) {
+      toast.error(ErrorHelpers.getMessage(error));
+    }
   };
 
   const handleClickDelete = async () => {
-    await deleteTaskAction(id, {
-      onSuccess() {
-        toast.success(`Task deleted: ${title}`);
-      },
-    });
+    try {
+      await deleteTaskAction(id, {
+        onSuccess() {
+          toast.success(`Task deleted: ${title}`);
+        },
+      });
+    } catch (error) {
+      toast.error(ErrorHelpers.getMessage(error));
+    }
   };
 
   return (

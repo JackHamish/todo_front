@@ -1,4 +1,4 @@
-import { SearchForm } from "@/components/froms/search-form";
+import { SearchForm } from "@/components/forms/search-form";
 import TaskList from "@/components/task-list";
 
 export default function Home() {

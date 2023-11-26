@@ -8,7 +8,7 @@ import Select from "react-select";
 import {
   selectClassnamesConfig,
   selectStylesConfig,
-} from "@/components/froms/search-form/constants";
+} from "@/components/forms/search-form/constants";
 import { Button } from "@/components/button";
 import { useAddTask } from "@/domains/task/hooks";
 import { toast } from "react-toastify";

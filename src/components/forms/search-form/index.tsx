@@ -9,14 +9,11 @@ import {
   statusSelectData,
 } from "./constants";
 import { Input } from "@/components/input";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDebounce } from "usehooks-ts";
 import Select from "react-select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useTasks } from "@/domains/task/hooks";
-import { useQueryClient } from "@tanstack/react-query";
 import pickBy from "lodash.pickby";
-import { log } from "console";
 
 type SearchFormData = z.infer<typeof searchSchema>;
 
@@ -25,14 +22,7 @@ export const SearchForm = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    trigger,
-    control,
-    formState: { errors },
-  } = useForm<SearchFormData>({
+  const { handleSubmit, control } = useForm<SearchFormData>({
     defaultValues: { title: "", priority: "priority_ASC", status: "all" },
   });
 
