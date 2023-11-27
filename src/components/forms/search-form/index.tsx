@@ -4,16 +4,14 @@ import { z } from "zod";
 import {
   prioritySelectData,
   searchSchema,
-  selectClassnamesConfig,
-  selectStylesConfig,
   statusSelectData,
 } from "./constants";
 import { Input } from "@/components/input";
 import { useEffect } from "react";
 import { useDebounce } from "usehooks-ts";
-import Select from "react-select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import pickBy from "lodash.pickby";
+import { Select } from "@/components/select";
 
 type SearchFormData = z.infer<typeof searchSchema>;
 
@@ -22,7 +20,7 @@ export const SearchForm = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
 
-  const { handleSubmit, control } = useForm<SearchFormData>({
+  const { handleSubmit, control, register } = useForm<SearchFormData>({
     defaultValues: { title: "", priority: "priority_ASC", status: "all" },
   });
 
@@ -30,11 +28,8 @@ export const SearchForm = () => {
     const newParams = new URLSearchParams(searchParams.toString());
 
     const params = {
-      sortField:
-        data?.priority?.split("_")[0] === "all"
-          ? ""
-          : data?.priority?.split("_")[0],
-      sortOrder: data?.priority?.split("_")[1] || "",
+      sortField: data?.priority?.split("_")[0],
+      sortOrder: data?.priority?.split("_")[1],
       title: data.title,
       status: data.status,
     };
@@ -87,26 +82,13 @@ export const SearchForm = () => {
       onSubmit={onSubmit}
       className="flex justify-center  items-center gap-10 max-sm:flex-wrap"
     >
-      <Controller
-        control={control}
-        name="title"
-        render={({ field: { onChange, onBlur, value, ref } }) => (
-          <Input
-            id="title"
-            name="title"
-            placeholder="Search"
-            onChange={onChange}
-            onBlur={onBlur}
-          />
-        )}
-      />
+      <Input id="title" placeholder="Search" {...register("title")} />
+
       <Controller
         control={control}
         name="status"
         render={({ field: { onChange, onBlur, value, ref } }) => (
           <Select
-            styles={selectStylesConfig}
-            classNames={selectClassnamesConfig}
             options={statusSelectData}
             onChange={(val) => onChange(val?.value)}
             onBlur={onBlur}
@@ -124,8 +106,6 @@ export const SearchForm = () => {
         name="priority"
         render={({ field: { onChange, onBlur, value, ref } }) => (
           <Select
-            styles={selectStylesConfig}
-            classNames={selectClassnamesConfig}
             options={prioritySelectData}
             onChange={(val) => onChange(val?.value)}
             onBlur={onBlur}

@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement>;
 
-const CheckBox = ({ className, ...rest }: Props) => {
+export const CheckBox = ({ className, ...rest }: Props) => {
   return (
     <div className="flex items-center p-4">
       <input
@@ -16,5 +16,3 @@ const CheckBox = ({ className, ...rest }: Props) => {
     </div>
   );
 };
-
-export default CheckBox;

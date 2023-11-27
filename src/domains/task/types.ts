@@ -12,14 +12,9 @@ export type Task = {
   status: TaskStatus;
 };
 
-export type CreateTask = {
-  title: string;
-  priority: number;
-};
+export type CreateTask = Pick<Task, "title" | "priority">;
 
-export type UpdateTask = {
-  status: TaskStatus;
-};
+export type UpdateTask = Pick<Task, "status">;
 
 export type TaskQueryParams = {
   title?: string;

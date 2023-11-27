@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Space_Mono, Work_Sans } from "next/font/google";
 import "./globals.css";
 import "../../public/fonts/icons/style.css";
-import QueryProvider from "@/components/providers/query-provider";
+import { QueryProvider } from "@/components/providers/query-provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Header } from "@/components/header";

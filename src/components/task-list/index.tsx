@@ -1,10 +1,11 @@
 "use client";
 import { useTasks } from "@/domains/task/hooks";
 import { TaskItem } from "../task-item";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { TaskQueryParams } from "@/domains/task";
 
-const TaskList = () => {
+export const TaskList = () => {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const queryParams: TaskQueryParams = Object.fromEntries(
@@ -15,17 +16,15 @@ const TaskList = () => {
     delete queryParams.status;
   }
 
-  const { data: tasks } = useTasks(queryParams);
+  const { data: tasks } = useTasks(queryParams, { enabled: pathname === "/" });
 
   return (
     <div className="max-w-2xl w-full h-[57vh] p-5 mt-5 gap-6 flex flex-col overflow-auto">
       {tasks?.length ? (
-        tasks.map((task) => <TaskItem key={task.id} {...task} />)
+        tasks.map((task) => <TaskItem key={task.id} task={task} />)
       ) : (
         <span className="font-sans text-md text-center">No tasks</span>
       )}
     </div>
   );
 };
-
-export default TaskList;

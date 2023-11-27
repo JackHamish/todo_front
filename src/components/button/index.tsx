@@ -1,6 +1,5 @@
-"use client";
 import { cn } from "@/utils/cn";
-import Icon from "../icon";
+import { Icon } from "../icon";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: string;

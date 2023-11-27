@@ -1,15 +1,17 @@
 import { Task, TaskStatus } from "@/domains/task";
 import { Button } from "../button";
-import CheckBox from "../check-box";
-import Icon from "../icon";
+import { CheckBox } from "../check-box";
+import { Icon } from "../icon";
 import { useDeleteTask, useUpdateTask } from "@/domains/task/hooks";
 import { toast } from "react-toastify";
 import { cn } from "@/utils/cn";
 import { ErrorHelpers } from "@/services/error/helpers";
 
-type Props = Task;
+type Props = {
+  task: Task;
+};
 
-export const TaskItem = ({ id, title, priority, status }: Props) => {
+export const TaskItem = ({ task: { id, title, priority, status } }: Props) => {
   const { mutateAsync: deleteTaskAction } = useDeleteTask();
   const { mutateAsync: updateTaskAction } = useUpdateTask();
 
@@ -55,7 +57,6 @@ export const TaskItem = ({ id, title, priority, status }: Props) => {
     >
       <CheckBox
         onChange={handleCheckBoxChange}
-        defaultChecked={status === TaskStatus.DONE ? true : false}
         disabled={status === TaskStatus.DONE ? true : false}
       />
       <h3 className="font-sans text-xl font-semibold truncate w-80">

@@ -6,7 +6,7 @@ import { useState } from "react";
 
 type Props = React.PropsWithChildren;
 
-export default function QueryProvider({ children }: Props) {
+export function QueryProvider({ children }: Props) {
   const [queryClient] = useState(new QueryClient());
 
   return (

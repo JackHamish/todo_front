@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Icon from "../icon";
+import { Icon } from "../icon";
 
 export const Header = () => {
   return (

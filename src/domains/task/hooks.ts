@@ -7,11 +7,12 @@ import {
 import { createTask, deleteTask, getAllTasks, updateTask } from "./services";
 import { CreateTask, TaskQueryParams, UpdateTask } from "./types";
 
-export const useTasks = (params: TaskQueryParams) =>
+export const useTasks = (params: TaskQueryParams, { enabled = true } = {}) =>
   useQuery({
     queryKey: ["tasks", params],
     queryFn: () => getAllTasks(params),
     placeholderData: keepPreviousData,
+    enabled,
   });
 
 export const useAddTask = () => {

@@ -2,7 +2,9 @@
 import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
 
-export default function Modal({ children }: { children: React.ReactNode }) {
+type Props = React.PropsWithChildren & {};
+
+export function Modal({ children }: Props) {
   const overlay = useRef(null);
   const wrapper = useRef(null);
   const router = useRouter();
@@ -17,7 +19,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
         if (onDismiss) onDismiss();
       }
     },
-    [onDismiss, overlay, wrapper],
+    [onDismiss, overlay],
   );
 
   const onKeyDown = useCallback(

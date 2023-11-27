@@ -1,5 +1,5 @@
-const Icon = (props: { icon?: string; className?: string }) => {
-  return <i className={`${props.icon} ${props.className}`} />;
-};
+type Props = { icon?: string; className?: string };
 
-export default Icon;
+export const Icon = ({ icon, className }: Props) => {
+  return <i className={`${icon} ${className}`} />;
+};
